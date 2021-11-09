@@ -3,7 +3,8 @@ import { getPokemon, getRunningOperationPromises, useGetPokemonQuery } from 'src
 import { wrapper } from 'src/store'
 
 const Home: NextPage = () => {
-  const result = useGetPokemonQuery(null)
+  // both of these work as intented
+  const result = useGetPokemonQuery()
 
   return (
     <>
@@ -16,8 +17,7 @@ const Home: NextPage = () => {
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   store => async () => {
-    // * store.dispatch(getPokemon.initiate()) this causes an error
-    store.dispatch(getPokemon.initiate(null)) // this doesn't
+    store.dispatch(getPokemon.initiate())
 
     await Promise.all(getRunningOperationPromises())
 
